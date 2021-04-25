@@ -1,7 +1,8 @@
-package com.volmit.iris.core;
+package com.volmit.iris.core.configuration;
 
-import art.arcane.quill.collections.hunk.Hunk;
+import lombok.Data;
 
+@Data
 public class IrisChunk
 {
     private final int x;

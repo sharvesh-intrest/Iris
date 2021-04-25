@@ -28,6 +28,11 @@ public class ArrayHunk<T> extends StorageHunk<T> implements Hunk<T>
 {
 	private final T[] data;
 
+	public ArrayHunk()
+	{
+		this(1,1,1);
+	}
+
 	@SuppressWarnings("unchecked")
 	public ArrayHunk(int w, int h, int d)
 	{

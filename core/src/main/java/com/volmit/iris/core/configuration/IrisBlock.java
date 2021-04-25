@@ -1,4 +1,4 @@
-package com.volmit.iris.core;
+package com.volmit.iris.core.configuration;
 
 import lombok.Data;
 

@@ -1,2 +1,8 @@
-package com.volmit.iris.core.configuration;public class IrisDimension {
+package com.volmit.iris.core.configuration;
+
+import lombok.Data;
+
+@Data
+public class IrisDimension
+{
 }

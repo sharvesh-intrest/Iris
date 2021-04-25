@@ -1,6 +1,7 @@
-package com.volmit.iris.core;
+package com.volmit.iris.core.configuration;
 
 import art.arcane.quill.collections.KMap;
+import com.volmit.iris.core.configuration.IrisBlock;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
