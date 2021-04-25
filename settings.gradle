@@ -1,0 +1,6 @@
+rootProject.name = 'Iris'
+include 'core'
+include 'bukkit12'
+include 'bukkit16'
+include 'forge16'
+
