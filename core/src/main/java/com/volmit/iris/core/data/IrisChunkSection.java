@@ -1,4 +1,4 @@
-package com.volmit.iris.core.configuration;
+package com.volmit.iris.core.data;
 
 import art.arcane.quill.collections.hunk.storage.ArrayHunk;
 import com.volmit.iris.core.configuration.IrisBlock;
