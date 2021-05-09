@@ -19,6 +19,9 @@
         <module name="Iris.core.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="Iris.forge16.main" target="8" />
+      <module name="Iris.forge16.test" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

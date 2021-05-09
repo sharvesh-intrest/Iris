@@ -13,5 +13,16 @@ dependencies {
     compileOnly "org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT"
 }
 
-rootProject.platformCode = "B";
-rootProject.mcVersion = "1.16.5";
+ext
+{
+    platformCode = "B";
+    mcVersion = "1.16.5";
+}
+
+processResources {
+    filesMatching("plugin.yml") {
+        expand("version": rootProject.version)
+        expand("platform-code": ext.platformCode)
+        expand("mc-version": ext.mcVersion)
+    }
+}

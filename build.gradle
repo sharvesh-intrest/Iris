@@ -4,17 +4,10 @@ plugins {
 
 group 'com.volmit.iris'
 version '3.0'
-String mcVersion = "-0.-0.-0"
-String platformCode = "X"
 
-subprojects {
-    processResources {
-        filesMatching(["plugin.yml", "META-INF/mods.toml", "mods.toml"]) {
-            expand("version": rootProject.version)
-            expand("platform-code": platformCode)
-            expand("mc-version": mcVersion)
-        }
-    }
+ext{
+    mcVersion = "-0.-0.-0"
+    platformCode = "X"
 }
 
 repositories {

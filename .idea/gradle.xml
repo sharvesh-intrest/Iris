@@ -15,22 +15,6 @@
             <option value="$PROJECT_DIR$/bukkit12" />
             <option value="$PROJECT_DIR$/bukkit16" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/forge16" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="delegatedBuild" value="true" />
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/forge16" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/bukkit12" />
-            <option value="$PROJECT_DIR$/bukkit16" />
-            <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/forge16" />
           </set>
         </option>
       </GradleProjectSettings>
