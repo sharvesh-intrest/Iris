@@ -16,6 +16,21 @@ public class IrisChunk
         sections = new IrisChunkSection[maxSections];
     }
 
+    public int maxY()
+    {
+        return sections.length * 16;
+    }
+
+    public void set(int x, int y, int z, IrisBlock block)
+    {
+        getOrCreateSection(y>>4).set(x&15, y&15, z&15, block);
+    }
+
+    public IrisBlock get(int x, int y, int z)
+    {
+        return getOrCreateSection(y>>4).get(x&15, y&15, z&15);
+    }
+
     public IrisChunkSection getSection(int sectionY)
     {
        return sections[sectionY];

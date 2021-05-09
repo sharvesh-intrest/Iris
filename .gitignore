@@ -1,0 +1,8 @@
+
+core/build/
+
+bukkit16/build/
+
+.gradle/
+
+.idea/

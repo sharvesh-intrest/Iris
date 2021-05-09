@@ -18,6 +18,7 @@ package art.arcane.quill.format;
 
 import art.arcane.quill.math.M;
 import art.arcane.quill.math.RollingSequence;
+import com.volmit.iris.core.integration.IntegratedDimension;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -1274,5 +1275,21 @@ public class Form {
         }
 
         return sb.toString();
+    }
+
+    public static String plural(int c, String s) {
+        return plural(c, s, s + "s");
+    }
+    public static String plural(int c, String s, String ss) {
+        return c == 1 ? s : ss;
+    }
+
+    public static boolean match(String mod, String search) {
+        if(mod.equalsIgnoreCase(search) || mod.toLowerCase(Locale.ROOT).contains(search.toLowerCase(Locale.ROOT)))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

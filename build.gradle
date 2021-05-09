@@ -6,8 +6,8 @@ group 'com.volmit.iris'
 version '3.0'
 
 ext{
-    mcVersion = "-0.-0.-0"
-    platformCode = "X"
+    String mcVersion = "-0.-0.-0"
+    String platformCode = "X"
 }
 
 repositories {

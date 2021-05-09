@@ -16,8 +16,8 @@ dependencies {
 
 ext
 {
-    platformCode = "B";
-    mcVersion = "1.16.5";
+    String platformCode = "B";
+    String mcVersion = "1.16.5";
 }
 
 processResources {

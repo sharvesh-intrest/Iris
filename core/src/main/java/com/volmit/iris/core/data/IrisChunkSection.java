@@ -1,7 +1,6 @@
 package com.volmit.iris.core.data;
 
 import art.arcane.quill.collections.hunk.storage.ArrayHunk;
-import com.volmit.iris.core.configuration.IrisBlock;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
