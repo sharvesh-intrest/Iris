@@ -1,7 +1,7 @@
 package com.volmit.iris.core.integration;
 
 import art.arcane.quill.format.Form;
-import com.volmit.iris.core.data.IrisBlock;
+import com.volmit.iris.core.object.IrisBlock;
 import lombok.Builder;
 import lombok.Data;
 

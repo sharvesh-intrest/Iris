@@ -1,7 +1,6 @@
 package com.volmit.iris.core;
 
 import art.arcane.quill.execution.Looper;
-import com.volmit.iris.core.data.IrisDimension;
 import com.volmit.iris.core.integration.IrisIntegration;
 import com.volmit.iris.core.util.ThreadBiased;
 

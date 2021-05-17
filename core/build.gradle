@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'java-library'
     id 'io.freefair.lombok' version '5.2.1'
 }
 
@@ -16,4 +15,5 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.github.ben-manes.caffeine:caffeine:2.8.5'
+    implementation 'io.timeandspace:smoothie-map:2.0.2'
 }

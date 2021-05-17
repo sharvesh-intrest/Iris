@@ -1,5 +1,6 @@
 package com.volmit.iris.core.data;
 
+import com.volmit.iris.core.object.IrisBlock;
 import lombok.Data;
 
 @Data

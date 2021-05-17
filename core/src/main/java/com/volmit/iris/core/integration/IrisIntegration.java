@@ -4,7 +4,9 @@ import art.arcane.quill.collections.KList;
 import art.arcane.quill.format.Form;
 import art.arcane.quill.tools.ExceptionTools;
 import com.volmit.iris.core.data.IrisChunk;
+import com.volmit.iris.core.ifs.IrisFileSystem;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Locale;
 
@@ -13,6 +15,7 @@ public abstract class IrisIntegration {
     private IntegratedBlock[] blocks;
     private IntegratedBiome[] biomes;
     private IntegrationCapability[] capabilities;
+    private IrisFileSystem ifs;
     public static final String minecraft = "minecraft";
 
     public IrisIntegration()
@@ -37,6 +40,7 @@ public abstract class IrisIntegration {
         registerCapabilities(d);
         this.capabilities = d.array();
         v("Integrated " + Form.plural(capabilities.length, "Capability", "Capabilities"));
+        ifs = new IrisFileSystem(getIrisFolder());
     }
 
     public Iterator<IntegratedBlock> getBlocks(String search)
@@ -109,6 +113,8 @@ public abstract class IrisIntegration {
         return deenum(e.name());
     }
 
+    public abstract boolean isValid();
+    public abstract File getIrisFolder();
     public abstract IrisChunk createChunk(IntegratedDimension dimension, int x, int z, Object[] data);
     public abstract void registerDimensions(KList<IntegratedDimension> dimensions);
     public abstract void registerBlocks(KList<IntegratedBlock> blocks);

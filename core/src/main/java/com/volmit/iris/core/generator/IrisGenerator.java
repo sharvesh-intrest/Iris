@@ -2,8 +2,7 @@ package com.volmit.iris.core.generator;
 
 import com.volmit.iris.core.Iris;
 import com.volmit.iris.core.data.IrisChunk;
-import com.volmit.iris.core.data.IrisChunkSection;
-import com.volmit.iris.core.data.IrisDimension;
+import com.volmit.iris.core.object.IrisDimension;
 import com.volmit.iris.core.integration.IntegratedDimension;
 import com.volmit.iris.core.integration.IrisIntegration;
 
