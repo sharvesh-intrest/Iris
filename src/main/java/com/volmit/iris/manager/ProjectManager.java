@@ -199,7 +199,7 @@ public class ProjectManager
 			url = getListing(false).get(key);
 			url = url == null ? key : url;
 			Iris.info("Assuming URL " + url);
-			String branch = "master";
+			String branch = "1.16";
 			String[] nodes = url.split("\\Q/\\E");
 			String repo = nodes[0] + "/" + nodes[1];
 			branch = nodes.length > 2 ? nodes[2] : branch;
@@ -363,11 +363,9 @@ public class ProjectManager
 			open(sender, dimm, () ->
 			{
 				if (sender.isPlayer()) {
-					sender.player().removePotionEffect(PotionEffectType.BLINDNESS);
 				}
 			});
 		} catch (Exception e){
-			sender.player().removePotionEffect(PotionEffectType.BLINDNESS);
 			sender.sendMessage("Error when creating studio world:");
 			e.printStackTrace();
 		}
