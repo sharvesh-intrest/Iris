@@ -1,5 +1,6 @@
 package com.volmit.iris.pregen;
 
+import com.volmit.iris.Iris;
 import com.volmit.iris.nms.INMS;
 import com.volmit.iris.scaffold.cache.Cache;
 import com.volmit.iris.scaffold.parallel.BurstExecutor;
@@ -58,12 +59,14 @@ public class DirectWorldWriter {
 
                     catch(Throwable e)
                     {
-
+                        Iris.error("Failed to cleanup palettes and block states for R<" + x + "," + z + ">");
+                        e.printStackTrace();
                     }
 
                     MCAUtil.write(writeBuffer.get(i), f, true);
                     writeBuffer.remove(i);
                 } catch (Throwable e) {
+                    Iris.error("Failed to write region R<" + x + "," + z + ">");
                     e.printStackTrace();
                 }
             });

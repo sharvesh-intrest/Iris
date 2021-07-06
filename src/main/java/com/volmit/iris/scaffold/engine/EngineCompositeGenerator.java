@@ -403,7 +403,16 @@ public class EngineCompositeGenerator extends ChunkGenerator implements IrisAcce
 
             @Override
             public void setBlock(int x, int y, int z, BlockData blockData) {
-                cc.setBlockStateAt((x+ox)&15, y, (z+oz)&15, writer.getCompound(blockData), false);
+                try
+                {
+                    cc.setBlockStateAt((x+ox)&15, y, (z+oz)&15, writer.getCompound(blockData), false);
+
+                }
+
+                catch(Throwable e)
+                {
+                    Iris.error("Failed to write block at " + (x+ox) + " " + y + " " + (z+oz));
+                }
             }
 
             @Override
@@ -418,7 +427,7 @@ public class EngineCompositeGenerator extends ChunkGenerator implements IrisAcce
                     y = 0;
                 }
 
-                return writer.getBlockData(cc.getBlockStateAt((x+ox)&15, y, (z+oz)&15));
+                return DirectWorldWriter.getBlockData(cc.getBlockStateAt((x+ox)&15, y, (z+oz)&15));
             }
 
             @Override
@@ -474,7 +483,7 @@ public class EngineCompositeGenerator extends ChunkGenerator implements IrisAcce
             }
         }).run();
 
-        writer.optimizeChunk(x, z);
+        //writer.optimizeChunk(x, z);
     }
 
     public Chunk generatePaper(World world, int x, int z)
