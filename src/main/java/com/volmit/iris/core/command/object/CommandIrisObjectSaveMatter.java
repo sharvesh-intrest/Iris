@@ -21,13 +21,11 @@ package com.volmit.iris.core.command.object;
 import com.volmit.iris.Iris;
 import com.volmit.iris.core.IrisSettings;
 import com.volmit.iris.core.WandManager;
-import com.volmit.iris.engine.object.objects.IrisObject;
 import com.volmit.iris.util.collection.KList;
-import com.volmit.iris.util.format.Form;
 import com.volmit.iris.util.matter.IrisMatter;
+import com.volmit.iris.util.matter.Matter;
 import com.volmit.iris.util.plugin.MortarCommand;
 import com.volmit.iris.util.plugin.VolmitSender;
-import com.volmit.iris.util.scheduling.PrecisionStopwatch;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -78,7 +76,7 @@ public class CommandIrisObjectSaveMatter extends MortarCommand {
 
             Player p = sender.player();
             ItemStack wand = p.getInventory().getItemInMainHand();
-            IrisMatter o = WandManager.createSchematic(p, wand);
+            Matter o = WandManager.createMatterSchem(p, wand);
             File file = Iris.proj.getWorkspaceFile(args[0], "objects", args[1] + ".iob");
 
             if (file.exists()) {

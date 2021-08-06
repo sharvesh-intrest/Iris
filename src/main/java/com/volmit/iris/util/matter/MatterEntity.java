@@ -16,18 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.volmit.iris.util.matter.slices;
+package com.volmit.iris.util.matter;
 
-import com.volmit.iris.core.project.loader.IrisRegistrant;
-import com.volmit.iris.util.matter.Sliced;
+import com.volmit.iris.util.nbt.tag.CompoundTag;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Sliced
-public class RegionMatter extends RegistryMatter<IrisRegistrant> {
-    public RegionMatter() {
-        this(1, 1, 1);
-    }
-
-    public RegionMatter(int width, int height, int depth) {
-        super(width, height, depth, IrisRegistrant.class);
-    }
+@Data
+@AllArgsConstructor
+public class MatterEntity {
+    private final double xOff;
+    private final double yOff;
+    private final double zOff;
+    private final CompoundTag entityData;
 }

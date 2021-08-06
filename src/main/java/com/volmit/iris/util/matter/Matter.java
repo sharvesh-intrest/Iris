@@ -19,6 +19,7 @@
 package com.volmit.iris.util.matter;
 
 import com.volmit.iris.engine.object.basic.IrisPosition;
+import com.volmit.iris.util.collection.KSet;
 import com.volmit.iris.util.data.Varint;
 import com.volmit.iris.util.hunk.Hunk;
 import com.volmit.iris.util.math.BlockPosition;
@@ -181,20 +182,19 @@ public interface Matter {
 
     /**
      * Rotate a matter object into a new object
+     *
      * @param x the x rotation (degrees)
      * @param y the y rotation (degrees)
      * @param z the z rotation (degrees)
      * @return the new rotated matter object
      */
-    default Matter rotate(double x, double y, double z)
-    {
+    default Matter rotate(double x, double y, double z) {
         IrisPosition rs = Hunk.rotatedBounding(getWidth(), getHeight(), getDepth(), x, y, z);
         Matter n = new IrisMatter(rs.getX(), rs.getY(), rs.getZ());
         n.getHeader().setAuthor(getHeader().getAuthor());
         n.getHeader().setCreatedAt(getHeader().getCreatedAt());
 
-        for(Class<?> i : getSliceTypes())
-        {
+        for (Class<?> i : getSliceTypes()) {
             getSlice(i).rotateSliceInto(n, x, y, z);
         }
 
@@ -234,12 +234,40 @@ public interface Matter {
      */
     Map<Class<?>, MatterSlice<?>> getSliceMap();
 
-    default void write(File f) throws IOException
-    {
+    default void write(File f) throws IOException {
         FileOutputStream out = new FileOutputStream(f);
         GZIPOutputStream gzo = new GZIPOutputStream(out);
         write(gzo);
         gzo.close();
+    }
+
+    /**
+     * Remove any slices that are empty
+     */
+    default void trimSlices()
+    {
+        Set<Class<?>> drop = null;
+
+        for(Class<?> i : getSliceTypes())
+        {
+            if(getSlice(i).getCount() == 0)
+            {
+                if(drop == null)
+                {
+                    drop = new KSet<>();
+                }
+
+                drop.add(i);
+            }
+        }
+
+        if(drop != null)
+        {
+            for(Class<?> i : drop)
+            {
+                deleteSlice(i);
+            }
+        }
     }
 
     /**
@@ -250,12 +278,12 @@ public interface Matter {
      * @throws IOException shit happens yo
      */
     default void write(OutputStream out) throws IOException {
+        trimSlices();
         DataOutputStream dos = new DataOutputStream(out);
-        // Write size
         Varint.writeUnsignedVarInt(getWidth(), dos);
         Varint.writeUnsignedVarInt(getHeight(), dos);
         Varint.writeUnsignedVarInt(getDepth(), dos);
-        dos.writeByte(getSliceTypes().size() + Byte.MIN_VALUE);
+        dos.writeByte(getSliceTypes().size());
         getHeader().write(dos);
 
         for (Class<?> i : getSliceTypes()) {
@@ -265,8 +293,7 @@ public interface Matter {
         dos.flush();
     }
 
-    static Matter read(File f) throws IOException, ClassNotFoundException
-    {
+    static Matter read(File f) throws IOException, ClassNotFoundException {
         FileInputStream in = new FileInputStream(f);
         GZIPInputStream gzi = new GZIPInputStream(in);
         Matter m = read(gzi);
@@ -274,8 +301,7 @@ public interface Matter {
         return m;
     }
 
-    static Matter read(InputStream in) throws IOException, ClassNotFoundException
-    {
+    static Matter read(InputStream in) throws IOException, ClassNotFoundException {
         return read(in, (b) -> new IrisMatter(b.getX(), b.getY(), b.getZ()));
     }
 
@@ -290,19 +316,28 @@ public interface Matter {
      */
     static Matter read(InputStream in, Function<BlockPosition, Matter> matterFactory) throws IOException, ClassNotFoundException {
         DataInputStream din = new DataInputStream(in);
-        // Read size into new matter object
         Matter matter = matterFactory.apply(new BlockPosition(
                 Varint.readUnsignedVarInt(din),
                 Varint.readUnsignedVarInt(din),
                 Varint.readUnsignedVarInt(din)));
-        int sliceCount = din.readByte() - Byte.MIN_VALUE;
+        int sliceCount = din.readByte();
         matter.getHeader().read(din);
 
         while (sliceCount-- > 0) {
-            Class<?> type = Class.forName(din.readUTF());
-            MatterSlice<?> slice = matter.createSlice(type, matter);
-            slice.read(din);
-            matter.putSlice(type, slice);
+            String cn = din.readUTF();
+            try
+            {
+                Class<?> type = Class.forName(cn);
+                MatterSlice<?> slice = matter.createSlice(type, matter);
+                slice.read(din);
+                matter.putSlice(type, slice);
+            }
+
+            catch(Throwable e)
+            {
+                e.printStackTrace();
+                throw new IOException("Can't read class '" + cn + "' (slice count reverse at " + sliceCount + ")");
+            }
         }
 
         return matter;
